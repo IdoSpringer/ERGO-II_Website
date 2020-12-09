@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <! bootstrap css>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <! link href="{{ url_for('static', filename='floating-labels.css') }}" rel="stylesheet">
+    <link href="static/try.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>ERGO-II</title>
+    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+
+</head>
+<body>
+    {% extends "template.html" %}
+    {% block content %}
+
+        <div class="full_horizontal">
+            <form class="form-signin" method="post" action="" enctype="multipart/form-data">
+              <div class="text-center mb-4">
+                <img class="mb-4" src="{{url_for('static', filename='Blausen_0625_Lymphocyte_T_cell_(crop).png')}}" alt="" width="72" height="72">
+                <h1 class="h3 mb-3 font-weight-normal">ERGO-II: Extended TCR-Peptide Binding Predictor</h1>
+              </div>
+                <h6><b>ERGO-II is an extended version of ERGO. We now include also V and J genes, TCR alpha data, MHC and T-Cell-Type.</b></h6>
+                <h6><b>The previous ERGO predictor can be found <a href="https://tcr.cs.biu.ac.il/home/">here</a>.</b></h6>
+                <br>
+                {% if error_message %}
+                <div><label style="color:darkred"><b>Bad input-file, please choose a different input file</b></label></div>
+                {% else %}
+                <label for="exampleFormControlFile1"><b>Upload an input file (see help for the right format):</b></label>
+                {% endif %}
+                <input type="file" name="input_file" class="form-control-file" id="exampleFormControlFile1">
+                <label for="model_type"><b>Model Type:</b></label><br>
+                <input type="radio" name="model_type" value="AE">Autoencoder based model<br>
+                <input type="radio" name="model_type" value="LSTM">LSTM based model<br>
+                <label for="database"><b>Training Database:</b></label><br>
+                <input type="radio" name="dataset" value="mcpas">McPAS<br>
+                <input type="radio" name="dataset" value="vdjdb">VDJdb<br>
+                <label for="configurations"><b>Feature Configurations:</b></label><br>
+                <input type="checkbox" name="use_alpha" id="use_alpha" value="true" onclick="logicFunction()">Use alpha<br>
+                <input type="checkbox" name="use_vj" id="use_vj" value="true" onclick="logicFunction()">Use V,J genes<br>
+                <input type="checkbox" name="use_mhc" id="use_mhc" value="true" onclick="logicFunction()">Use MHC<br>
+                <input type="checkbox" name="use_t_type" id="use_t_type" value="true" onclick="logicFunction()">Use T-Cell Type<br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Predict</button>
+            </form>
+
+            <script>
+            function logicFunction() {
+              var features = [document.getElementById("use_alpha"),
+                              document.getElementById("use_vj"),
+                              document.getElementById("use_mhc"),
+                              document.getElementById("use_t_type")];
+              var sum = 0;
+              var index = 0;
+              var max_index = 0;
+              for (i=0; i<features.length; i++) {
+                if (features[i].checked == true) {
+                  sum++;
+                  max_index = index;
+                }
+                index++;
+              }
+              // if sum is 1 we do nothing
+              // else we have to activate previous features
+              if (sum > 1) {
+                for (i=0; i<=max_index; i++) {
+                  features[i].checked = true;
+                }
+              }
+            }
+            </script>
+
+            <hr>
+
+            <p><b>Cite as:</b> Springer I, Tickotsky-Moskovitz N, Louzoun Y (2020),
+                Relative contribution of T Cell Receptor alpha and beta
+                CDR3, MHC typing, V and J genes to peptide binding
+                prediction.</p>
+            <p>Check out our <a href="https://github.com/IdoSpringer/ERGO-II">github repository</a>!</p>
+            <p></p>
+            <hr>
+            <p class="mt-5 mb-3 text-muted text-center">&copy; Louzoun-Lab 2020</p>
+        </div>
+
+    <! bootstrap >
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    {% endblock %}
+
+</body>
+</html>
