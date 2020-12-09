@@ -22,7 +22,7 @@
                         The file should be a CSV table with several columns, matching the relevant features.<br>
                         The file have to include the column headers 'TRA', 'TRB', 'TRAV', 'TRAJ', 'TRBV', 'TRBJ', 'T-Cell-Type', 'Peptide' and 'MHC', even if not all features are used.<br>
                         Leave blank spots for missing features, yet 'TRB' and 'Peptide' sequences must appear in each line.<br>
-                        ERGO expects TCR sequences to begin with Cysteine ('C') and finish with Phenylalanine ('F').<br>
+                        ERGO-II expects TCR sequences to begin with Cysteine ('C') and finish with Phenylalanine ('F').<br>
                         Make sure your file contain only upper-cased amino-acid letters, without any other characters as '*', 'X' or non-ascii characters.<br>
                         T-Cell-Type can be 'CD4' or 'CD8'.<br>
                         The model prediction might crash for wrong input files.<br>
@@ -33,10 +33,10 @@
                     <li>
                         <h5><b>2. Model Configurations </b></h5>
                         Choose the model configuration for the prediction.<br>
-                        ERGO uses two distinct models: the autoencoder based model or the LSTM based model.<br>
+                        ERGO-II is trained using two distinct models: the autoencoder based model or the LSTM based model.<br>
                         You can also choose the database that the model used for training: McPAS or VDJdb.<br>
                         Additional features such as TCR alpha sequence, V and J genes, MHC and T-Cell-Type can be used.<br>
-                        Note that you can choose only a configuration that was reported in our manuscript.<br><br>
+                        Note that this webtool allows you to choose only configurations that ERGO-II has already trained on.<br><br>
                     </li>
                     <li>
                         <h5><b>3. Submit to prediction </b></h5>
@@ -44,6 +44,9 @@
                     </li>
                     <li>
                         <h5><b>4. Download results </b></h5>
+                        The results format is a csv file similar to the input format, with an additional score column,<br>
+                        which contains the model predictions between 0 and 1 for each row.<br>
+                        For example, see the output file in the 'Example' section.<br><br>
                     </li>
                 </ul>
         </div>

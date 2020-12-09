@@ -94,9 +94,19 @@ def example():
     return render_template("example.html")
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
 @app.route("/download_example")
 def download_example():
     return send_from_directory(directory="static", filename="example.csv")
+
+
+@app.route("/download_result")
+def download_result():
+    return send_from_directory(directory="static", filename="results_1meaj.csv")
 
 
 if __name__ == "__main__":

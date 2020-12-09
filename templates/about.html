@@ -8,22 +8,20 @@
     <link href="static/try.css" rel="stylesheet">
 
     <meta charset="UTF-8">
-    <title>Example</title>
+    <title>About</title>
 </head>
 <body>
     {% extends "template.html" %}
     {% block content %}
 
-        <div class="help_text">
+        <div class="about">
             <br>
-            <h5><a href="{{url_for('download_example')}}" target="_blank">Download example data</a></h5>
-            To download an example input file, click on "Download example data".
+            <br>The ERGO-II algorithm was developed by Ido Springer, Prof. Yoram Louzoun and Nili Tickotski at Bar-Ilan University.
+            <br>This webtool was implemented by Ido Springer.
+            <br>A standalone version of the ERGO-II code is available at out <a href="https://github.com/IdoSpringer/ERGO-II">github repository</a>.
+            <br>Visit <a href="yolo.math.biu.ac.il" target="_blank">Prof. Louzoun's lab website</a> to further explore
+            the lab's research domains.
             <br>
-            <br>
-            <h5><a href="{{url_for('download_result')}}" target="_blank">Download example output</a></h5>
-            To download an example output file, click on "Download example output".<br>
-            This is the ERGO-II model output, when using the autoencoder based model, on McPAS dataset,<br>
-            with alpha and V,J genes included (but MHC and T-cell type were not included).
         </div>
 
     <! bootstrap >
